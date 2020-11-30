@@ -156,7 +156,7 @@ public class UGTeleop extends OpMode
             BeltMotor.setPower(0.8);
         }
         if (gamepad1.y){
-
+//spin to face goal. move right to allign with goal. raise shooter and start spinning wheel. Shooting is left to A
         }
         if (gamepad1.a){
             BeltMotor.setDirection(DcMotorSimple.Direction.REVERSE);
