@@ -1,12 +1,16 @@
 Gamepad 1	
 
 Y (single tap)	Auto line up/angle shooter
+Work on it
 
 Left Stick Y	Drive Forward and Backwards
+Done
 
 Left Stick X	Strafe Left and Right
+Done
 
 Right Stick X	Turn Right and Left
+Done
 
 B (single tap)	Suck toggle on
 
