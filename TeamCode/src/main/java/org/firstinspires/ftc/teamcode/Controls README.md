@@ -13,14 +13,17 @@ Right Stick X	Turn Right and Left
 Done
 
 B (single tap)	Suck toggle on
+Done
 
 B (single tap)	Suck toggle off
+Done
 
 X (single tap)	Lift up full
 
 X (single tap)	Lift down full
 
 A (when held) reverse belt for shooting/ turns off suck in
+Done
 
 Lb (single tap toggle) wobble goal holder servo toggle
 

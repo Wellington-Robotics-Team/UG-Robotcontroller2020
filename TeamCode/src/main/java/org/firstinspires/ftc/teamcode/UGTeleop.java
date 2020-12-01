@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -37,6 +38,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
+import com.qualcomm.hardware.bosch.BNO055IMU;
 
 
 /**
@@ -155,15 +157,19 @@ public class UGTeleop extends OpMode
             BeltMotor.setDirection(DcMotorSimple.Direction.FORWARD);
             BeltMotor.setPower(0.8);
         }
-        if (gamepad1.y){
-//spin to face goal. move right to allign with goal. raise shooter and start spinning wheel. Shooting is left to A (the person)
-        }
         if (gamepad1.a){
+            IntakeOn=false;
             BeltMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        BeltMotor.setPower(0.5);
-        }else{
+            BeltMotor.setPower(0.3);
+        }
+        while (IntakeOn=false && !gamepad1.a) {
             BeltMotor.setPower(0);
         }
+        if (gamepad1.y){
+//spin to face goal. move right to allign with goal. raise shooter and start spinning wheel. Shooting is left to A (the person)
+
+        }
+
         // Show the elapsed game time
         telemetry.addData("Status", "Run Time: " + runtime.toString());
 
@@ -179,6 +185,14 @@ public class UGTeleop extends OpMode
         BRM.setPower(0);
         FRM.setPower(0);
         BeltMotor.setPower(0);
+        IntakeMotor.setPower(0);
     }
+    public void RotateWithGyro (double desiredAngle, double TurningSpeed){
 
+    }
+public void MoveUsingDistanceSensor (String direction,double DistanceFromWall) {
+//obtain direction (Forwards, backwards, right,left)
+    //ramp up motor speed until half way to distancefromwall, then ramp down faster. Finish moving at 0.1 power
+
+}
 }
