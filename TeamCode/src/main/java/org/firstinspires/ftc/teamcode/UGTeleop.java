@@ -35,10 +35,16 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.OrientationSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.hardware.bosch.BNO055IMU;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 
 /**
@@ -70,6 +76,8 @@ public class UGTeleop extends OpMode
     private DistanceSensor BDist;
     private double MovePower;
     private boolean IntakeOn = false;
+
+
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -100,10 +108,20 @@ public class UGTeleop extends OpMode
 
         IntakeMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);//dont lock up when not moving
 
-
         BeltMotor = hardwareMap.get(DcMotor.class,"BeltMotor");
         BeltMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         BeltMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        //something about gyros figure this out later
+        BNO055IMU gyro;
+        Orientation angles;
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+        gyro = hardwareMap.get(BNO055IMU.class,"Gyro");
+        gyro.initialize(parameters);
+        angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZXY, AngleUnit.DEGREES);
+
+
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -166,7 +184,7 @@ public class UGTeleop extends OpMode
             BeltMotor.setPower(0);
         }
         if (gamepad1.y){
-//spin to face goal. move right to allign with goal. raise shooter and start spinning wheel. Shooting is left to A (the person)
+//spin to face goal/initialorientation. move right to allign with goal. raise shooter and start spinning wheel. Shooting is left to A (the person)
 
         }
 
