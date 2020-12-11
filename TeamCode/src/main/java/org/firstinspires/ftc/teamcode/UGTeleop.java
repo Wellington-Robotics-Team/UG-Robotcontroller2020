@@ -44,6 +44,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 
@@ -121,9 +122,14 @@ public class UGTeleop extends OpMode
         gyro.initialize(parameters);
         angles = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZXY, AngleUnit.DEGREES);
 
+        //remove this after testing how distance sensor outputs
+        Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor)RDist;
+        telemetry.addData("range", String.format("%.01f cm", RDist.getDistance(DistanceUnit.CM)));
+        telemetry.addData("range", String.format("%.01f cm", (RDist.getDistance(DistanceUnit.CM))-2));
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
+
         telemetry.update();
     }
 
@@ -132,7 +138,9 @@ public class UGTeleop extends OpMode
      */
     @Override
     public void init_loop() {
+
     }
+
 
     /*
      * Code to run ONCE when the driver hits PLAY
@@ -211,6 +219,9 @@ public class UGTeleop extends OpMode
 public void MoveUsingDistanceSensor (String direction,double DistanceFromWall) {
 //obtain direction (Forwards, backwards, right,left)
     //ramp up motor speed until half way to distancefromwall, then ramp down faster. Finish moving at 0.1 power
-
+    Rev2mDistanceSensor sensorTimeOfFlight = (Rev2mDistanceSensor)RDist;
+    telemetry.addData("range", String.format("%.01f cm", RDist.getDistance(DistanceUnit.CM)));
+    telemetry.addData("range", String.format("%.01f cm", (RDist.getDistance(DistanceUnit.CM))-2));
+    telemetry.update();
 }
 }
